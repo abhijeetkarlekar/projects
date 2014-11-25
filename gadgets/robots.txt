@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /
+User-agent: YandexBot 
+Disallow: /
+User-agent: gsa-crawler 
+Disallow: /
+User-agent: S5-MTT875WZ6UJJT 
+Disallow: /
+Crawl-delay: 120
+User-agent: Googlebot
+Allow: /
+User-agent: Slurp
+Allow: /
+User-agent: bingbot
+Allow: /
+User-Agent: msnbot
+Disallow:
