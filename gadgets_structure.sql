@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.34, for Linux (x86_64)
+-- MySQL dump 10.11
 --
--- Host: localhost    Database: staging_gadgets_india
+-- Host: 192.168.1.141    Database: staging_gadgets_india
 -- ------------------------------------------------------
--- Server version	5.5.34
+-- Server version	5.1.54-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -347,7 +347,7 @@ CREATE TABLE `FEATURE_MASTER` (
   KEY `unit_id` (`unit_id`),
   KEY `main_feature_group` (`main_feature_group`),
   CONSTRAINT `FEATURE_MASTER_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `CATEGORY_MASTER` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=latin1 COMMENT='table is used to store the information of brand/product feat';
+) ENGINE=InnoDB AUTO_INCREMENT=155 DEFAULT CHARSET=latin1 COMMENT='table is used to store the information of brand/product feat';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -596,7 +596,7 @@ CREATE TABLE `NEWS_FEED_CACHE` (
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`news_id`),
   UNIQUE KEY `category_id` (`category_id`,`brand_id`,`model_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1224 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1223 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -681,7 +681,7 @@ CREATE TABLE `PIVOT_MASTER` (
   `update_date` datetime NOT NULL,
   PRIMARY KEY (`pivot_id`),
   UNIQUE KEY `pivot_unique` (`category_id`,`feature_id`,`pivot_group`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=latin1 COMMENT='table is used to store the key features.';
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1 COMMENT='table is used to store the key features.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -773,6 +773,28 @@ CREATE TABLE `POPULAR_FEATURE_CARS` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `PRICE_RANGE`
+--
+
+DROP TABLE IF EXISTS `PRICE_RANGE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `PRICE_RANGE` (
+  `price_range_id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL,
+  `price_range_from` varchar(250) NOT NULL,
+  `price_range_to` varchar(250) NOT NULL,
+  `url` varchar(250) NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  `position` int(2) NOT NULL DEFAULT '0',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` datetime NOT NULL,
+  PRIMARY KEY (`price_range_id`),
+  UNIQUE KEY `price_range_from` (`price_range_from`,`price_range_to`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `PRICE_VARIANT_FORMULA`
 --
 
@@ -841,7 +863,7 @@ CREATE TABLE `PRICE_VARIANT_VALUES` (
   KEY `variant_value` (`variant_value`),
   KEY `variant_id` (`variant_id`),
   KEY `default_city` (`default_city`)
-) ENGINE=InnoDB AUTO_INCREMENT=7630 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7846 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -860,7 +882,7 @@ CREATE TABLE `PRODUCT_FEATURE` (
   PRIMARY KEY (`product_feature_id`),
   UNIQUE KEY `unique_product_feature` (`product_id`,`feature_id`),
   KEY `feature_id` (`feature_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=208978 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=213130 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -879,7 +901,7 @@ CREATE TABLE `PRODUCT_FEATURE_12_12_14` (
   PRIMARY KEY (`product_feature_id`),
   UNIQUE KEY `unique_product_feature` (`product_id`,`feature_id`),
   KEY `feature_id` (`feature_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=144762 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=144676 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -905,7 +927,7 @@ CREATE TABLE `PRODUCT_MASTER` (
   `img_media_id` int(11) NOT NULL,
   `image_path` text NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
-  `bgrrating` int(11) NOT NULL DEFAULT '0',
+  `bgrrating` float(4,2) DEFAULT NULL,
   `discontinue_flag` tinyint(2) NOT NULL DEFAULT '1' COMMENT '0-discontinue ,1-continue',
   `discontinue_date` datetime NOT NULL,
   `arrival_date` date NOT NULL,
@@ -958,7 +980,7 @@ CREATE TABLE `PRODUCT_NAME_INFO` (
   KEY `discontinue_flag` (`discontinue_flag`),
   KEY `discontinue_date` (`discontinue_date`),
   KEY `seo_path` (`seo_path`)
-) ENGINE=InnoDB AUTO_INCREMENT=10553600 DEFAULT CHARSET=latin1 COMMENT='use to store product name info';
+) ENGINE=InnoDB AUTO_INCREMENT=10553601 DEFAULT CHARSET=latin1 COMMENT='use to store product name info';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -988,7 +1010,7 @@ CREATE TABLE `PRODUCT_SLIDES` (
   KEY `group_id` (`group_id`),
   KEY `brand_id` (`brand_id`),
   KEY `product_info_id` (`product_info_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1010,7 +1032,7 @@ CREATE TABLE `PRODUCT_VIDEOS` (
   `update_date` datetime NOT NULL,
   PRIMARY KEY (`product_video_id`),
   UNIQUE KEY `video_id` (`video_id`,`group_id`,`category_id`,`brand_id`,`product_info_id`,`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1053,7 +1075,7 @@ CREATE TABLE `SEARCH` (
   `update_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`search_id`),
   UNIQUE KEY `search` (`search`)
-) ENGINE=InnoDB AUTO_INCREMENT=2459 DEFAULT CHARSET=latin1 COMMENT='used to product search';
+) ENGINE=InnoDB AUTO_INCREMENT=2426 DEFAULT CHARSET=latin1 COMMENT='used to product search';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1085,7 +1107,7 @@ CREATE TABLE `SLIDESHOW` (
   PRIMARY KEY (`slideshow_id`),
   UNIQUE KEY `product_slide_id` (`product_slide_id`,`title`,`media_id`),
   UNIQUE KEY `product_slide_id_2` (`product_slide_id`,`title`,`media_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=389 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=770 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1117,7 +1139,7 @@ CREATE TABLE `STAGING_PRICE_VARIANT_VALUES` (
   KEY `default_city` (`default_city`),
   KEY `color_id` (`color_id`),
   KEY `variant_id` (`variant_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6220 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6189 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1187,7 +1209,7 @@ CREATE TABLE `TOP_COMPETITOR` (
   KEY `product_ids` (`product_ids`),
   KEY `product_info_ids` (`product_info_ids`),
   KEY `brand_ids` (`brand_ids`)
-) ENGINE=InnoDB AUTO_INCREMENT=128230 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=294279 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1265,7 +1287,9 @@ DROP TABLE IF EXISTS `UPCOMING_PRODUCT_MASTER`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `UPCOMING_PRODUCT_MASTER` (
   `upcoming_product_id` int(50) NOT NULL AUTO_INCREMENT,
+  `brand_id` int(11) NOT NULL,
   `product_name_id` int(50) NOT NULL,
+  `product_id` int(11) NOT NULL,
   `feature_id` int(11) NOT NULL,
   `min_expected_price` int(11) NOT NULL,
   `min_expected_price_unit` int(11) NOT NULL,
@@ -1285,7 +1309,7 @@ CREATE TABLE `UPCOMING_PRODUCT_MASTER` (
   `update_date` datetime NOT NULL,
   PRIMARY KEY (`upcoming_product_id`),
   UNIQUE KEY `product_name_id` (`product_name_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1334,7 +1358,7 @@ CREATE TABLE `USERS` (
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `source_user_id` (`source_user_id`,`user_name`,`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1353,7 +1377,7 @@ CREATE TABLE `USER_OVERALL_RATING` (
   `update_date` datetime NOT NULL,
   PRIMARY KEY (`overall_id`),
   KEY `user_review_id` (`user_review_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1382,12 +1406,11 @@ CREATE TABLE `USER_REVIEW` (
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_date` datetime NOT NULL,
   PRIMARY KEY (`user_review_id`),
-  UNIQUE KEY `title` (`title`),
   KEY `brand_id` (`brand_id`),
   KEY `category_id` (`category_id`),
   KEY `product_info_id` (`product_info_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=155 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1409,7 +1432,7 @@ CREATE TABLE `USER_REVIEW_ANSWER` (
   `update_date` datetime NOT NULL,
   PRIMARY KEY (`usr_review_ans_id`),
   KEY `user_review_id` (`user_review_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=301 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1429,7 +1452,7 @@ CREATE TABLE `USER_REVIEW_LIKES` (
   `update_date` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `review_id` (`review_id`,`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1505,7 +1528,7 @@ CREATE TABLE `VIDEO_GALLERY` (
   `update_date` datetime NOT NULL,
   PRIMARY KEY (`video_id`),
   UNIQUE KEY `video_id` (`video_id`,`type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -1517,4 +1540,4 @@ CREATE TABLE `VIDEO_GALLERY` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-24 15:28:13
+-- Dump completed on 2015-01-09 18:20:02
