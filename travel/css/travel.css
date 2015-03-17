@@ -1,0 +1,55 @@
+.placemap {
+
+  margin-top: 20px;
+
+  border: 1px solid #a9aaaa;
+
+  background: #f3f3f3;
+
+}
+
+.placemap h2 {
+
+  font-size: 18px;
+
+  color: #7554f5;
+
+  text-align: center;
+
+  border-bottom: 1px solid #a9aaaa;
+
+  padding: 5px;
+
+  background: #cccccc;
+
+}
+
+.placemap aside figure {
+
+  padding: 10px;
+
+}
+
+.placemap aside figure .imgt {
+
+  float: left;
+
+  margin-right: 10px;
+
+}
+
+.placemap aside figure figcaption a h2 {
+
+  font-size: 13px;
+
+  font-weight: bold;
+
+}
+
+.placemap aside figure figcaption p {
+
+  color: #4e4e4e;
+
+  font-size: 14px;
+
+}
